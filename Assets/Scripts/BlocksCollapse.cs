@@ -87,7 +87,7 @@ public class BlocksCollapse : MonoBehaviour
 
     public void ArrangeArrays(List<int> sortedSubArray, int currentIndex, int currentRow, int distance = 1)//todo düzenle
     {
-        if (currentRow + distance < blocksSc.row - 1)
+        if (currentRow + distance < Blocks.row - 1)
         {
             blocksSc.blockArrayAsNum[currentRow][column] = blocksSc.blockArrayAsNum[currentRow + distance][column];
 
@@ -128,7 +128,7 @@ public class BlocksCollapse : MonoBehaviour
                 subArray.Sort();
                 for (int j = 0; j < subArray.Count; j++)
                 {
-                    if(j == subArray.Count - 1) upperLimit = blocksSc.row -1;
+                    if(j == subArray.Count - 1) upperLimit = Blocks.row -1;
                     else upperLimit = subArray[j + 1];
 
                     for (int row = subArray[j]; row < upperLimit; row++)
@@ -141,9 +141,9 @@ public class BlocksCollapse : MonoBehaviour
                         blocksSc.blockArray[row - j][column].name = (row - j) + "" + column;
                     }
                 }
-                for (int k = blocksSc.row - subArray.Count; k < blocksSc.row; k++)
+                for (int k = Blocks.row - subArray.Count; k < Blocks.row; k++)
                 {
-                    int tempRandomNumber = Random.Range(0, blocksSc.numberOfColors);
+                    int tempRandomNumber = Random.Range(0, Blocks.numberOfColors);
                     blocksSc.blockArrayAsNum[k][column] = tempRandomNumber;
                     Vector2 tempPosition = new Vector2(column, 2 + blocksSc.height);
                     if (k - 1 >= 0 && blocksSc.blockArray[k - 1][column].transform.position.y > blocksSc.height)
@@ -159,7 +159,7 @@ public class BlocksCollapse : MonoBehaviour
             }
             else
             {
-                for (int row = array[i][0]; row < blocksSc.row - 1; row++)
+                for (int row = array[i][0]; row < Blocks.row - 1; row++)
                 {
                     blocksSc.blockArrayAsNum[row][column] = blocksSc.blockArrayAsNum[row + 1][column];
 
@@ -167,17 +167,17 @@ public class BlocksCollapse : MonoBehaviour
                     blocksSc.blockArray[row][column].GetComponent<SpriteRenderer>().sortingOrder = row;
                     blocksSc.blockArray[row][column].name = row + "" + column;
                 }
-                int tempRandomNumber = Random.Range(0, blocksSc.numberOfColors);
-                blocksSc.blockArrayAsNum[blocksSc.row - 1][column] = tempRandomNumber;
+                int tempRandomNumber = Random.Range(0, Blocks.numberOfColors);
+                blocksSc.blockArrayAsNum[Blocks.row - 1][column] = tempRandomNumber;
                 Vector2 tempPosition = new Vector2(column, 2 + blocksSc.height);
-                if (blocksSc.row - 2 >= 0 && blocksSc.blockArray[blocksSc.row - 2][column].transform.position.y > blocksSc.height)
+                if (Blocks.row - 2 >= 0 && blocksSc.blockArray[Blocks.row - 2][column].transform.position.y > blocksSc.height)
                 {
-                    tempPosition.y = blocksSc.blockArray[blocksSc.row - 2][column].transform.position.y + 2;
+                    tempPosition.y = blocksSc.blockArray[Blocks.row - 2][column].transform.position.y + 2;
                 }
                 GameObject block = Instantiate(blocksSc.blocks2d[tempRandomNumber][0], tempPosition, Quaternion.identity);
-                block.name = (blocksSc.row - 1) + "" + column;
-                block.GetComponent<SpriteRenderer>().sortingOrder = blocksSc.row;
-                blocksSc.blockArray[blocksSc.row - 1][column] = block;
+                block.name = (Blocks.row - 1) + "" + column;
+                block.GetComponent<SpriteRenderer>().sortingOrder = Blocks.row;
+                blocksSc.blockArray[Blocks.row - 1][column] = block;
             }
         }
     }
@@ -207,9 +207,9 @@ public class BlocksCollapse : MonoBehaviour
                     }                  
                 }             
             }
-            for (int i = blocksSc.row - numOfNewObj; i < blocksSc.row; i++)
+            for (int i = Blocks.row - numOfNewObj; i < Blocks.row; i++)
             {                   
-                int tempRandomNumber = Random.Range(0, blocksSc.numberOfColors);
+                int tempRandomNumber = Random.Range(0, Blocks.numberOfColors);
                 blocksSc.blockArrayAsNum[i][j] = tempRandomNumber;
                 tempPosition = new Vector2(j, 2 + blocksSc.height);
                 if (i - 1 >= 0 && blocksSc.blockArray[i - 1][j].transform.position.y > blocksSc.height)

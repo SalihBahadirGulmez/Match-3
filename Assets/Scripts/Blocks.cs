@@ -12,9 +12,9 @@ public class Blocks : MonoBehaviour
     public List<GameObject> yellowBlocks = new List<GameObject>();
     public List<List<GameObject>> blocks2d = new List<List<GameObject>>();
 
-    public int row = 9;
-    public int column = 9;
-    public int numberOfColors = 6;
+    public static int row = 3;
+    public static int column = 3;
+    public static int numberOfColors = 2;
     public int conditionA = 4;
     public int conditionB = 6;
     public int conditionC = 7;
