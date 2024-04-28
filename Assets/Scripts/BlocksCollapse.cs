@@ -10,9 +10,12 @@ public class BlocksCollapse : MonoBehaviour
     int tempNum1;
     int tempNum2;
     Vector2 tempPosition;
+
+    private BGmusic BGmusicSc;
     void Start()
     {
         blocksSc = GameObject.Find("Blocks").GetComponent<Blocks>();
+        BGmusicSc = GameObject.Find("Dont Destroy/Audio").GetComponent<BGmusic>();
     }
 
     void OnMouseDown()
@@ -37,6 +40,7 @@ public class BlocksCollapse : MonoBehaviour
                 {
                     if (blocksSc.indexArray[i][j] + "" + blocksSc.indexArray[i][j + 1] == gameObject.name)
                     {
+                        BGmusicSc.PopSound();
                         for (int k = 1; k < blocksSc.indexArray[i].Count; k += 2)
                         {                          
                             tempNum1 = blocksSc.indexArray[i][k];

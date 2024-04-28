@@ -274,9 +274,6 @@ MonoBehaviour:
   - {fileID: 784976861873758984, guid: 983be9636bf04194bbd4a19e784ec34b, type: 3}
   - {fileID: 171094200583344778, guid: 33badf524842a0b4c9730c18c653827d, type: 3}
   - {fileID: 6103908336049375096, guid: 5ca9e5ecac38942468c899f059092f25, type: 3}
-  row: 9
-  column: 9
-  numberOfColors: 6
   conditionA: 4
   conditionB: 5
   conditionC: 6
