@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BlocksCollapse : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class BlocksCollapse : MonoBehaviour
     Vector2 tempPosition;
 
     private BGmusic BGmusicSc;
+
+    public GameObject explosionPrefab;
     void Start()
     {
         blocksSc = GameObject.Find("Blocks").GetComponent<Blocks>();
@@ -45,6 +48,7 @@ public class BlocksCollapse : MonoBehaviour
                         {                          
                             tempNum1 = blocksSc.indexArray[i][k];
                             tempNum2 = blocksSc.indexArray[i][k + 1];
+                            StartCoroutine(ExplosionAnim(blocksSc.blockArray[tempNum1][tempNum2].transform));
                             Destroy(blocksSc.blockArray[tempNum1][tempNum2]);
                             blocksSc.blockArrayAsNum[tempNum1][tempNum2] = 10;
                         }
@@ -56,7 +60,13 @@ public class BlocksCollapse : MonoBehaviour
             }
         }
     }
+    IEnumerator ExplosionAnim(Transform destroyedGameobj)
+    {
+        GameObject explosionAnim = Instantiate(explosionPrefab, destroyedGameobj.position, Quaternion.identity);
+        yield return new WaitForSecondsRealtime(1f);
+        Destroy(explosionAnim);
 
+    }
     public void DestroyObject2() //todo düzenle
     {
         reBuild = false;
