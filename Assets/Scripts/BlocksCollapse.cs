@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 public class BlocksCollapse : MonoBehaviour
 {
@@ -67,6 +66,51 @@ public class BlocksCollapse : MonoBehaviour
         Destroy(explosionAnim);
 
     }
+    public void ReBuild()
+    {
+        for (int j = 0; j < blocksSc.blockArrayAsNum[0].Count; j++)
+        {
+            int numOfNewObj = 0;
+
+            for (int i = 0; i < blocksSc.blockArrayAsNum.Count; i++)
+            {
+                if (blocksSc.blockArrayAsNum[i][j] == 10)
+                {
+                    numOfNewObj++;
+                    for (int k = i + 1; k < blocksSc.blockArrayAsNum.Count; k++)
+                    {
+                        if (blocksSc.blockArrayAsNum[k][j] != 10)
+                        {
+                            blocksSc.blockArrayAsNum[i][j] = blocksSc.blockArrayAsNum[k][j];
+                            blocksSc.blockArrayAsNum[k][j] = 10;
+                            numOfNewObj--;
+                            blocksSc.blockArray[i][j] = blocksSc.blockArray[k][j];
+                            blocksSc.blockArray[i][j].GetComponent<SpriteRenderer>().sortingOrder = i;
+                            blocksSc.blockArray[i][j].name = i + "" + j;
+                            break;
+                        }
+                    }
+                }
+            }
+            for (int i = Blocks.row - numOfNewObj; i < Blocks.row; i++)
+            {
+                int tempRandomNumber = Random.Range(0, Blocks.numberOfColors);
+                blocksSc.blockArrayAsNum[i][j] = tempRandomNumber;
+                tempPosition = new Vector2(j, 2 + blocksSc.height);
+                if (i - 1 >= 0 && blocksSc.blockArray[i - 1][j].transform.position.y > blocksSc.height)
+                {
+                    tempPosition.y = blocksSc.blockArray[i - 1][j].transform.position.y + 2;
+                }
+                block = Instantiate(blocksSc.blocks2d[tempRandomNumber][0], tempPosition, Quaternion.identity);
+                block.name = i + "" + j;
+                block.GetComponent<SpriteRenderer>().sortingOrder = i;
+                blocksSc.blockArray[i][j] = block;
+            }
+        }
+    }
+
+
+    /*
     public void DestroyObject2() //todo düzenle
     {
         reBuild = false;
@@ -195,46 +239,5 @@ public class BlocksCollapse : MonoBehaviour
             }
         }
     }
-    public void ReBuild()
-    {
-        for (int j = 0; j < blocksSc.blockArrayAsNum[0].Count; j++)
-        {
-            int numOfNewObj = 0;
-
-            for (int i = 0; i < blocksSc.blockArrayAsNum.Count; i++)
-            {
-                if (blocksSc.blockArrayAsNum[i][j] == 10)
-                {
-                    numOfNewObj++;
-                    for (int k = i + 1; k < blocksSc.blockArrayAsNum.Count; k++)
-                    {
-                        if (blocksSc.blockArrayAsNum[k][j] != 10)
-                        {
-                            blocksSc.blockArrayAsNum[i][j] = blocksSc.blockArrayAsNum[k][j];
-                            blocksSc.blockArrayAsNum[k][j] = 10;
-                            numOfNewObj--;
-                            blocksSc.blockArray[i][j] = blocksSc.blockArray[k][j];
-                            blocksSc.blockArray[i][j].GetComponent<SpriteRenderer>().sortingOrder = i;
-                            blocksSc.blockArray[i][j].name = i + "" + j;
-                            break;
-                        }
-                    }                  
-                }             
-            }
-            for (int i = Blocks.row - numOfNewObj; i < Blocks.row; i++)
-            {                   
-                int tempRandomNumber = Random.Range(0, Blocks.numberOfColors);
-                blocksSc.blockArrayAsNum[i][j] = tempRandomNumber;
-                tempPosition = new Vector2(j, 2 + blocksSc.height);
-                if (i - 1 >= 0 && blocksSc.blockArray[i - 1][j].transform.position.y > blocksSc.height)
-                {
-                    tempPosition.y = blocksSc.blockArray[i - 1][j].transform.position.y + 2;
-                }
-                block = Instantiate(blocksSc.blocks2d[tempRandomNumber][0], tempPosition, Quaternion.identity);
-                block.name = i + "" + j;
-                block.GetComponent<SpriteRenderer>().sortingOrder = i;
-                blocksSc.blockArray[i][j] = block;
-            }
-        }
-    }
+    */
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BGmusic : MonoBehaviour
@@ -14,11 +12,6 @@ public class BGmusic : MonoBehaviour
         DontDestroyOnLoad(dontDestroy);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void PopSound()
     {
         audioSource.PlayOneShot(pop);

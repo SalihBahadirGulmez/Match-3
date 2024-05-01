@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -19,26 +17,12 @@ public class GameManager : MonoBehaviour
     private int maxNumberOfColor = 6;
     private int minNumberOfColor = 2;
 
-
     public GameObject audioSlider;
     public Slider audioSliderComponent;
     public BGmusic BGmusicSc;
 
-    RaycastHit2D hit;
-    Ray ray;
-    Vector2 position = new Vector2(0,0);
-    Vector2 mousePos;
-
-    EventSystem e;
-
     bool canSliderStatusChange = true;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         if (audioSlider.activeSelf)
